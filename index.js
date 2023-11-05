@@ -1,19 +1,18 @@
 import express from "express";
 import dotenv from "dotenv";
 import morgan from "morgan";
-
-const app = express();
+import notes from "./routes/notes.js";
 
 dotenv.config({
   path: "./config/config.env",
 });
 
+const app = express();
+
 app.use(express.json());
 app.use(morgan("dev"));
 
-app.get("/", (req, res) => {
-  res.send("hello baby");
-});
+app.use("/api/v1/notes", notes);
 
 app.listen(3333, () => {
   console.log("listening on port 3333");
